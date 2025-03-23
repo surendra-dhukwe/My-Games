@@ -1,0 +1,93 @@
+body {
+    background: linear-gradient(to right, #3cecff, #b682ff);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    background: linear-gradient(to right, #f678f6, #7474ff);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    color: white;
+}
+
+.controls, .steps, #manualControls {
+    margin: 15px 0;
+}
+
+input, button {
+    font-size: 16px;
+    padding: 8px 12px;
+    margin: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button {
+    background-color: lightblue;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: deepskyblue;
+}
+
+.towers {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 150px;
+    margin-top: 20px;
+    height: 300px;
+}
+
+.tower {
+    height: 250px;
+    width: 10px;
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.disk {
+    height: 30px;
+    font-size: large;
+    color: white;
+    background-color: rgb(39, 125, 236);
+    border-radius: 10px;
+    border: 2px solid black;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.ground {
+    height: 40px;
+    width: 550px;
+    background-color: chocolate;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#name {
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    text-align: center;
+}
+
+#name p {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <link rel="stylesheet" href="tawerOfHanoi.css">
+</head>
+<body>
+
+    <h1>Tower of Hanoi</h1>
+
+    <div class="controls">
+        <input type="number" id="numInput" value="3" min="1">
+        <button id="generateDisk">Show Disks</button>
+        <button id="manualMode">Manual Mode</button>
+        <button id="autoMode">Auto Mode</button>
+    </div>
+
+    <div class="towers">
+        <div class="tower" id="source"></div>
+        <div class="tower" id="helper"></div>
+        <div class="tower" id="destination"></div>
+    </div>
+
+    <div class="ground">
+        <div id="name">
+            <p>Source</p>
+            <p>Helper</p>
+            <p>Destination</p>
+        </div>
+    </div>
+
+    <div id="manualControls">
+        <h3>Move Manually</h3>
+        <button onclick="moveDisk(source, helper)">Source → Helper</button>
+        <button onclick="moveDisk(source, destination)">Source → Destination</button>
+        <button onclick="moveDisk(helper, source)">Helper → Source</button>
+        <button onclick="moveDisk(helper, destination)">Helper → Destination</button>
+        <button onclick="moveDisk(destination, source)">Destination → Source</button>
+        <button onclick="moveDisk(destination, helper)">Destination → Helper</button>
+    </div>
+
+    <div class="steps">
+        <p>Moves: <span id="moveCounter">0</span></p>
+        <button id="stepSolve">Step Solve</button>
+        <button id="autoSolve">Auto Solve</button>
+    </div>
+
+    <script src="tawerOfHanoi.js"></script>
+</body>
+</html>
