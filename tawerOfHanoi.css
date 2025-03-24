@@ -18,6 +18,10 @@ h1 {
     margin: 15px 0;
 }
 
+#manualControls, #moveManual {
+    display: none;
+}
+
 input, button {
     font-size: 16px;
     padding: 8px 12px;
@@ -90,4 +94,13 @@ button:hover {
     padding-right: 5px;
     border: 2px solid black;
     border-radius: 10px;
+}
+
+.messageLog {
+    display: none;
+    height: 200px;
+    overflow-y: scroll;
+    margin-top: 15px;
+    border: 2px solid #ccc;
+    padding: 10px;
 }

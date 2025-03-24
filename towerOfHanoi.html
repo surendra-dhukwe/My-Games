@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tower of Hanoi</title>
-    <link rel="stylesheet" href="tawerOfHanoi.css">
+    <link rel="stylesheet" href="tawerOfHanoi.css"/>
 </head>
 <body>
 
@@ -15,6 +15,7 @@
         <button id="generateDisk">Show Disks</button>
         <button id="manualMode">Manual Mode</button>
         <button id="autoMode">Auto Mode</button>
+        <button id="showStep">Show Steps</button>
     </div>
 
     <div class="towers">
@@ -30,9 +31,8 @@
             <p>Destination</p>
         </div>
     </div>
-
+    <h3 id="moveManual">Move Manually</h3>
     <div id="manualControls">
-        <h3>Move Manually</h3>
         <button onclick="moveDisk(source, helper)">Source → Helper</button>
         <button onclick="moveDisk(source, destination)">Source → Destination</button>
         <button onclick="moveDisk(helper, source)">Helper → Source</button>
@@ -43,10 +43,12 @@
 
     <div class="steps">
         <p>Moves: <span id="moveCounter">0</span></p>
-        <button id="stepSolve">Step Solve</button>
-        <button id="autoSolve">Auto Solve</button>
     </div>
 
-    <script src="tawerOfHanoi.js"></script>
+    <!-- Message Log for Solution Steps -->
+    <div class="messageLog">
+        <p><strong>Solution Steps:</strong></p>
+    </div>
+    <script src="tawerOfHanoi.js"></script>    
 </body>
 </html>
