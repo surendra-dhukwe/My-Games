@@ -147,7 +147,7 @@ function getTowerName(tower) {
             return "Unknown";
     }
 }
-=======
+// =======
 const generateDisk = document.querySelector("#generateDisk");
 const manualMode = document.querySelector("#manualMode");
 const autoMode = document.querySelector("#autoMode");
@@ -296,4 +296,4 @@ function getTowerName(tower) {
             return "Unknown";
     }
 }
->>>>>>> 5df724d5f176750634089aef6e63c95f70f8d162
+// >>>>>>> 5df724d5f176750634089aef6e63c95f70f8d162

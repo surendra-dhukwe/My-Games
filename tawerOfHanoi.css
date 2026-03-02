@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
 body {
     background: linear-gradient(to right, #3cecff, #b682ff);
     font-family: Arial, sans-serif;
@@ -104,7 +104,8 @@ button:hover {
     margin-top: 15px;
     border: 2px solid #ccc;
     padding: 10px;
-=======
+}
+/* ======= */
 body {
     background: linear-gradient(to right, #3cecff, #b682ff);
     font-family: Arial, sans-serif;
@@ -210,5 +211,5 @@ button:hover {
     margin-top: 15px;
     border: 2px solid #ccc;
     padding: 10px;
->>>>>>> 5df724d5f176750634089aef6e63c95f70f8d162
+/* >>>>>>> 5df724d5f176750634089aef6e63c95f70f8d162 */
 }
