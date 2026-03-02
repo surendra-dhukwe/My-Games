@@ -111,13 +111,14 @@ function logMove(from, to) {
 // ================= MANUAL MODE =================
 
 manualMode.addEventListener("click", () => {
-    manualControls.style.display = "block";
     moveManual.style.display = "block";
+    manualControls.style.display = "grid";
+    manualControls.style.animation = "slideUp 0.4s ease";
 });
 
 autoMode.addEventListener("click", () => {
-    manualControls.style.display = "none";
     moveManual.style.display = "none";
+    manualControls.style.display = "none";
 });
 
 // ================= SHOW / HIDE STEPS =================
