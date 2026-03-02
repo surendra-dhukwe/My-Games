@@ -113,7 +113,6 @@ function logMove(from, to) {
 manualMode.addEventListener("click", () => {
     moveManual.style.display = "block";
     manualControls.style.display = "grid";
-    manualControls.style.animation = "slideUp 0.4s ease";
 });
 
 autoMode.addEventListener("click", () => {
@@ -124,13 +123,12 @@ autoMode.addEventListener("click", () => {
 // ================= SHOW / HIDE STEPS =================
 
 showStep.addEventListener("click", () => {
-    messageLog.style.display = "block";
+    if (messageLog.style.display === "block") {
+        messageLog.style.display = "none";
+    } else {
+        messageLog.style.display = "block";
+    }
 });
-
-showStep.addEventListener("dblclick", () => {
-    messageLog.style.display = "none";
-});
-
 // ================= HANOI ALGORITHM =================
 
 function solveHanoi(n, from, to, via) {

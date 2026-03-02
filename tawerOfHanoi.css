@@ -137,3 +137,55 @@ button:active {
         padding: 12px;
     }
 }
+
+/* ================= MANUAL BUTTON SECTION ================= */
+
+#moveManual {
+    margin-top: 25px;
+    font-size: 18px;
+}
+
+/* 2-2 Grid Layout */
+#manualControls {
+    display: none;
+    grid-template-columns: repeat(2, 220px);
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+/* Manual Buttons Style */
+#manualControls button {
+    width: 220px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease-in-out;
+}
+
+/* Hover Effect */
+#manualControls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* Click Effect */
+#manualControls button:active {
+    transform: scale(0.95);
+}
+
+/* ================= MOBILE VIEW ================= */
+
+@media (max-width: 768px) {
+
+    #manualControls {
+        grid-template-columns: 1fr;   /* 1-1 stack */
+        width: 95%;
+        margin: 15px auto;
+    }
+
+    #manualControls button {
+        width: 100%;
+        font-size: 15px;
+    }
+}
