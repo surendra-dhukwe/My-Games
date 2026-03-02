@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐍 Saanp Seedi Game 🎲</title>
+</head>
+<link rel="stylesheet" href="snack.css"/>
+<body>
+
+<h1>🐍 Saanp Seedi Game 🎲</h1>
+
+<!-- Options -->
+<div class="options" id="optionsMenu">
+  <button onclick="startGame('computer')">🎮 Play with Computer</button>
+  <button onclick="startGame('friend1')">👫 Play with 1 Friend</button>
+  <button onclick="startGame('friend2')">👨‍👩‍👧 Play with 2 Friends</button>
+  <button onclick="startGame('friend3')">👨‍👩‍👧‍👦 Play with 3 Friends</button>
+</div>
+
+<!-- Game Board -->
+<div class="gameBoard" id="board"></div>
+
+<!-- Roll Dice Button -->
+<button id="rollBtn" style="display:none;" onclick="rollDice()">🎲 पासा फेंको</button>
+
+<!-- Dice Result Circles -->
+<div class="dice-container" id="diceDisplay"></div>
+
+<!-- Message Area -->
+<div id="message">🎯 गेम शुरू करने के लिए ऊपर से मोड चुनें...</div>
+
+<!-- Player Info -->
+<div class="playerInfo" id="infoDisplay"></div>
+
+<script src="snack.js">
+</script>
+</body>
+</html>

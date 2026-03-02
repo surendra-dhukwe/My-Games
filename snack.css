@@ -1,0 +1,142 @@
+ body {
+    background: linear-gradient(to right, #3cecff, #b682ff);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+  }
+
+  h1 {
+    background: linear-gradient(to right, #f678f6, #7474ff);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .options {
+    margin-bottom: 20px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: lightblue;
+    transition: 0.3s;
+    margin: 5px;
+  }
+
+  button:hover { background-color: deepskyblue; }
+
+  .gameBoard {
+    margin: 10px auto;
+    width: 500px;
+    height: 500px;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: #f5deb3;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    position: relative;
+  }
+
+  .cell {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+  }
+
+  .ladder { background-color: #fff176; } /* Yellow for ladder */
+  .snake { background-color: #a5d6a7; }  /* Green for snake */
+
+  .arrow {
+    position: absolute;
+    font-size: 18px;
+  }
+
+  .player {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid black;
+    transition: all 0.3s ease;
+  }
+
+  .player1 { background-color: red; }
+  .computer { background-color: purple; }
+  .friend1 { background-color: orange; }
+  .friend2 { background-color: blue; }
+  .friend3 { background-color: green; }
+
+  #message {
+    margin-top: 15px;
+    background: #ffffffb0;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  .dice-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .dice-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: white;
+    transition: 0.3s;
+  }
+
+  .playerInfo {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .playerLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+  }
+
+
+
+  
+  .colorBox {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+
+  @media (max-width: 768px) {
+    .gameBoard { width: 320px; height: 320px; }
+    .cell { font-size: 10px; }
+    .player { width: 16px; height: 16px; }
+    .dice-circle { width: 45px; height: 45px; font-size: 18px; }
+  }
