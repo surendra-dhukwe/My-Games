@@ -10,45 +10,67 @@ const msg = document.getElementById("msg");
 const userScorePara = document.getElementById("user-score");
 const compScorePara = document.getElementById("comp-score");
 const totalMovesPara = document.getElementById("total-moves");
-const resetBtn = document.getElementById("reset-btn");
 
 const popup = document.getElementById("winner-popup");
 const popupText = document.getElementById("popup-text");
 const popupRestart = document.getElementById("popup-restart");
 
-const genCompChoice = () => {
+
+// ✅ Generate Computer Choice
+function genCompChoice() {
   const options = ["rock", "paper", "scissors"];
-  return options[Math.floor(Math.random() * 3)];
-};
+  return options[Math.floor(Math.random() * options.length)];
+}
 
-const showPopup = (text) => {
-  popupText.innerText = text;
-  popup.classList.add("show");
-};
 
-const checkFinalWinner = () => {
-  if (userScore === winningScore) {
+// ✅ Show Popup (Force Repaint Fix for Hosting)
+function showPopup(text) {
+  popupText.textContent = text;
+
+  popup.style.display = "flex";   // Important
+  setTimeout(() => {
+    popup.classList.add("show");
+  }, 10);
+}
+
+
+// ✅ Hide Popup
+function hidePopup() {
+  popup.classList.remove("show");
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 300);
+}
+
+
+// ✅ Final Winner Check
+function checkFinalWinner() {
+  if (userScore >= winningScore) {
     gameOver = true;
     showPopup(`🎉 Congratulations! You Won in ${totalMoves} Moves!`);
   } 
-  else if (compScore === winningScore) {
+  else if (compScore >= winningScore) {
     gameOver = true;
     showPopup(`💻 Computer Won in ${totalMoves} Moves!`);
   }
-};
+}
 
-const playGame = (userChoice) => {
+
+// ✅ Main Game Logic
+function playGame(userChoice) {
 
   if (gameOver) return;
 
   const compChoice = genCompChoice();
   totalMoves++;
-  totalMovesPara.innerText = totalMoves;
+  totalMovesPara.textContent = totalMoves;
 
   if (userChoice === compChoice) {
-    msg.innerText = "It's a Draw 🤝";
+    msg.textContent = "It's a Draw 🤝";
     msg.className = "draw";
-  } else {
+  } 
+  else {
     const userWin =
       (userChoice === "rock" && compChoice === "scissors") ||
       (userChoice === "paper" && compChoice === "rock") ||
@@ -56,38 +78,43 @@ const playGame = (userChoice) => {
 
     if (userWin) {
       userScore++;
-      userScorePara.innerText = userScore;
-      msg.innerText = `You Win! ${userChoice} beats ${compChoice}`;
+      userScorePara.textContent = userScore;
+      msg.textContent = `You Win! ${userChoice} beats ${compChoice}`;
       msg.className = "win";
-    } else {
+    } 
+    else {
       compScore++;
-      compScorePara.innerText = compScore;
-      msg.innerText = `You Lost! ${compChoice} beats ${userChoice}`;
+      compScorePara.textContent = compScore;
+      msg.textContent = `You Lost! ${compChoice} beats ${userChoice}`;
       msg.className = "lose";
     }
   }
 
   checkFinalWinner();
-};
+}
 
+
+// ✅ Click Events
 choices.forEach(choice => {
   choice.addEventListener("click", () => {
     playGame(choice.id);
   });
 });
 
+
+// ✅ Restart Button
 popupRestart.addEventListener("click", () => {
   userScore = 0;
   compScore = 0;
   totalMoves = 0;
   gameOver = false;
 
-  userScorePara.innerText = 0;
-  compScorePara.innerText = 0;
-  totalMovesPara.innerText = 0;
+  userScorePara.textContent = 0;
+  compScorePara.textContent = 0;
+  totalMovesPara.textContent = 0;
 
-  msg.innerText = "Play your move";
+  msg.textContent = "Play your move";
   msg.className = "";
 
-  popup.classList.remove("show");
+  hidePopup();
 });
