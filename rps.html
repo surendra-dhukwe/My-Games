@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="rps.css">
+</head>
+<body>
+
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="choices">
+    <div class="choice" id="rock">🪨</div>
+    <div class="choice" id="paper">📄</div>
+    <div class="choice" id="scissors">✂️</div>
+  </div>
+
+  <div class="score-board">
+    <div class="score">
+      <p id="user-score">0</p>
+      <p>You</p>
+    </div>
+    <div class="score">
+      <p id="comp-score">0</p>
+      <p>Comp</p>
+    </div>
+  </div>
+
+  <div class="move-counter">
+  Total Moves : <span id="total-moves">0</span>
+  </div>
+
+  <div class="msg-container">
+    <p id="msg">Play your move</p>
+  </div>
+
+  <!-- Winner Popup -->
+<div id="winner-popup" class="popup">
+  <div class="popup-content">
+    <h2 id="popup-text"></h2>
+    <button id="popup-restart">Play Again</button>
+  </div>
+</div>
+
+  <script src="rps.js"></script>
+</body>
+</html>
