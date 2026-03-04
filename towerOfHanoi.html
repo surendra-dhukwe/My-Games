@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="tawerOfHanoi.css"/>
     <link rel="stylesheet" href="mod.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <body>
 <div class="mode-toggle" id="mod">👁️</div>
 
@@ -50,7 +51,9 @@
     </div>
 </div>
 
-<h3 id="moveManual">Move Manually</h3>
+<div class="moveManual">
+    <h3 id="moveManual">Move Manually</h3>
+</div>
 
 <div id="manualControls">
     <button onclick="moveDisk(source, helper)">Source → Helper</button>

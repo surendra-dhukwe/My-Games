@@ -12,25 +12,33 @@ const destination = document.getElementById("destination");
 
 const manualControls = document.querySelector("#manualControls");
 const moveManual = document.querySelector("#moveManual");
-
 const messageLog = document.querySelector(".messageLog");
 
 // ================= VARIABLES =================
 
 let moves = 0;
 let moveQueue = [];
+let stepsArray = [];
+let totalDisks = 0;
 
-// ================= UTIL FUNCTIONS =================
+// ================= RESET GAME =================
 
 function resetGame() {
     source.innerHTML = "";
     helper.innerHTML = "";
     destination.innerHTML = "";
     messageLog.innerHTML = "<p><strong>Solution Steps:</strong></p>";
+
     moves = 0;
     moveQueue = [];
+    stepsArray = [];
     moveCounter.innerText = moves;
+
+    const oldBtn = document.getElementById("downloadPdf");
+    if (oldBtn) oldBtn.remove();
 }
+
+// ================= CREATE DISK =================
 
 function createDisk(size) {
     const disk = document.createElement("div");
@@ -42,10 +50,7 @@ function createDisk(size) {
 }
 
 function getTowerName(tower) {
-    if (tower.id === "source") return "Source";
-    if (tower.id === "helper") return "Helper";
-    if (tower.id === "destination") return "Destination";
-    return "Unknown";
+    return tower.id.charAt(0).toUpperCase() + tower.id.slice(1);
 }
 
 // ================= GENERATE DISKS =================
@@ -54,10 +59,11 @@ generateDisk.addEventListener("click", () => {
     const n = parseInt(document.getElementById("numInput").value);
 
     if (!n || n < 1) {
-        alert("Please enter a valid number of disks");
+        alert("Enter valid number of disks");
         return;
     }
 
+    totalDisks = n;
     resetGame();
 
     for (let i = n; i >= 1; i--) {
@@ -65,7 +71,7 @@ generateDisk.addEventListener("click", () => {
     }
 });
 
-// ================= MOVE DISK =================
+// ================= MANUAL MOVE =================
 
 function moveDisk(from, to) {
     const disk = from.lastElementChild;
@@ -79,116 +85,171 @@ function moveDisk(from, to) {
 
     if (diskSize < topSize) {
         to.appendChild(disk);
+
         moves++;
         moveCounter.innerText = moves;
-        logMove(from, to);
+
+        const stepText = `Step ${moves}: Disk moved from ${getTowerName(from)} to ${getTowerName(to)}`;
+        stepsArray.push(stepText);
+
+        const p = document.createElement("p");
+        p.textContent = stepText;
+        messageLog.appendChild(p);
+        messageLog.scrollTop = messageLog.scrollHeight;
+
         checkWin();
     } else {
-        alert("Invalid move! Bigger disk cannot be placed on smaller disk.");
+        alert("Invalid move! Larger disk cannot be placed on smaller disk.");
     }
 }
 
 // ================= WIN CHECK =================
 
 function checkWin() {
-    const total = parseInt(document.getElementById("numInput").value);
-    if (destination.childElementCount === total) {
+    if (destination.childElementCount === totalDisks) {
         setTimeout(() => {
-            alert(`🎉 Congratulations! You solved it in ${moves} moves!`);
-        }, 200);
+            alert(`Puzzle solved in ${moves} moves.`);
+            addDownloadButton();
+        }, 300);
     }
 }
 
-// ================= LOG MOVE =================
-
-function logMove(from, to) {
-    const p = document.createElement("p");
-    p.innerText = `Move disk from ${getTowerName(from)} to ${getTowerName(to)}`;
-    messageLog.appendChild(p);
-    messageLog.scrollTop = messageLog.scrollHeight;
-}
-
-// ================= MANUAL MODE =================
-
-manualMode.addEventListener("click", () => {
-    moveManual.style.display = "block";
-    manualControls.style.display = "grid";
-});
-
-autoMode.addEventListener("click", () => {
-    moveManual.style.display = "none";
-    manualControls.style.display = "none";
-});
-
-// ================= SHOW / HIDE STEPS =================
-
-showStep.addEventListener("click", () => {
-    if (messageLog.style.display === "block") {
-        messageLog.style.display = "none";
-    } else {
-        messageLog.style.display = "block";
-    }
-});
-// ================= HANOI ALGORITHM =================
+// ================= AUTO SOLVER =================
 
 function solveHanoi(n, from, to, via) {
     if (n === 1) {
-        moveQueue.push([from, to]);
+        const stepText = `Step ${moveQueue.length + 1}: Disk moved from ${getTowerName(from)} to ${getTowerName(to)}`;
+        moveQueue.push([from, to, stepText]);
         return;
     }
 
     solveHanoi(n - 1, from, via, to);
-    moveQueue.push([from, to]);
+
+    const stepText = `Step ${moveQueue.length + 1}: Disk moved from ${getTowerName(from)} to ${getTowerName(to)}`;
+    moveQueue.push([from, to, stepText]);
+
     solveHanoi(n - 1, via, to, from);
 }
 
-// ================= AUTO EXECUTION =================
+// ================= AUTO MODE =================
 
 autoMode.addEventListener("click", () => {
     const n = parseInt(document.getElementById("numInput").value);
     if (!n) return;
 
-    moveQueue = [];
+    totalDisks = n;
+    resetGame();
+
+    for (let i = n; i >= 1; i--) {
+        source.appendChild(createDisk(i));
+    }
+
     solveHanoi(n, source, destination, helper);
     executeMoves();
 });
 
 function executeMoves() {
-    if (moveQueue.length === 0) return;
-
-    const [from, to] = moveQueue.shift();
-    moveDisk(from, to);
-
-    setTimeout(executeMoves, 700);
-}
-
-// ================= MANUAL CONTROLS =================
-
-moveManual.addEventListener("click", () => {
-    const fromId = document.getElementById("fromSelect").value;
-    const toId = document.getElementById("toSelect").value;
-
-    if (fromId === toId) {
-        alert("Please select different towers for move.");
+    if (moveQueue.length === 0) {
+        addDownloadButton();
         return;
     }
 
-    const fromTower = document.getElementById(fromId);
-    const toTower = document.getElementById(toId);
+    const [from, to, stepText] = moveQueue.shift();
 
-    moveDisk(fromTower, toTower);
+    const disk = from.lastElementChild;
+    if (disk) to.appendChild(disk);
+
+    moves++;
+    moveCounter.innerText = moves;
+
+    stepsArray.push(stepText);
+
+    const p = document.createElement("p");
+    p.textContent = stepText;
+    messageLog.appendChild(p);
+    messageLog.scrollTop = messageLog.scrollHeight;
+
+    setTimeout(executeMoves, 500);
+}
+
+// ================= SHOW STEP TOGGLE =================
+
+showStep.addEventListener("click", () => {
+    messageLog.style.display =
+        messageLog.style.display === "none" ? "block" : "none";
 });
 
-const rulesBtn = document.getElementById("rulesBtn");
-const rulesPanel = document.getElementById("rulesPanel");
-const closeRules = document.getElementById("closeRules");
+// ================= PDF BUTTON =================
 
-rulesBtn.addEventListener("click", () => {
-    rulesPanel.classList.add("active");
-    document.body.classList.add("blur-active");
-});
+function addDownloadButton() {
+    if (document.getElementById("downloadPdf")) return;
 
-closeRules.addEventListener("click", () => {
-    rulesPanel.classList.remove("active");
-    document.body.classList.remove("blur-active");
-});
+    const btn = document.createElement("button");
+    btn.id = "downloadPdf";
+    btn.innerText = "Download Solution Report (PDF)";
+    btn.style.marginTop = "15px";
+    btn.style.padding = "10px 18px";
+    btn.style.cursor = "pointer";
+    btn.onclick = downloadPDF;
+
+    messageLog.appendChild(btn);
+}
+
+// ================= PROFESSIONAL PDF FIX =================
+
+function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+    });
+
+    let y = 20;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("Tower of Hanoi - Solution Report", 105, y, { align: "center" });
+
+    y += 15;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    doc.text(`Number of Disks: ${totalDisks}`, 20, y);
+    y += 8;
+
+    doc.text(`Total Moves Performed: ${moves}`, 20, y);
+    y += 8;
+
+    doc.text(`Minimum Required Moves: ${Math.pow(2, totalDisks) - 1}`, 20, y);
+    y += 12;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Detailed Execution Steps:", 20, y);
+    y += 10;
+
+    doc.setFont("helvetica", "normal");
+
+    stepsArray.forEach(step => {
+
+        // ✅ IMPORTANT FIX (No spacing bug)
+        const wrappedText = doc.splitTextToSize(step, 170);
+
+        if (y > 270) {
+            doc.addPage();
+            y = 20;
+        }
+
+        doc.text(wrappedText, 20, y);
+        y += wrappedText.length * 7;
+    });
+
+    // Footer
+    const date = new Date().toLocaleString();
+    doc.setFontSize(9);
+    doc.text(`Generated on: ${date}`, 20, 290);
+
+    doc.save("Tower_of_Hanoi_Solution.pdf");
+}
