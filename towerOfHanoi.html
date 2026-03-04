@@ -56,12 +56,12 @@
 </div>
 
 <div id="manualControls">
-    <button onclick="moveDisk(source, helper)">Source → Helper</button>
-    <button onclick="moveDisk(source, destination)">Source → Destination</button>
-    <button onclick="moveDisk(helper, source)">Helper → Source</button>
-    <button onclick="moveDisk(helper, destination)">Helper → Destination</button>
-    <button onclick="moveDisk(destination, source)">Destination → Source</button>
-    <button onclick="moveDisk(destination, helper)">Destination → Helper</button>
+    <button data-from="source" data-to="helper">Source → Helper</button>
+    <button data-from="source" data-to="destination">Source → Destination</button>
+    <button data-from="helper" data-to="source">Helper → Source</button>
+    <button data-from="helper" data-to="destination">Helper → Destination</button>
+    <button data-from="destination" data-to="source">Destination → Source</button>
+    <button data-from="destination" data-to="helper">Destination → Helper</button>
 </div>
 
 <div class="steps">

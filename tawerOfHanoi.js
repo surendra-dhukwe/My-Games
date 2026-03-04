@@ -11,8 +11,33 @@ const helper = document.getElementById("helper");
 const destination = document.getElementById("destination");
 
 const manualControls = document.querySelector("#manualControls");
+const manualButtons = manualControls.querySelectorAll("button");
 const moveManual = document.querySelector("#moveManual");
 const messageLog = document.querySelector(".messageLog");
+
+const rulesBtn = document.getElementById("rulesBtn");
+const rulesPanel = document.getElementById("rulesPanel");
+const closeBtn = document.getElementById("closeRules");
+
+// Open panel
+rulesBtn.addEventListener("click", () => {
+    rulesPanel.classList.add("active");
+    document.body.classList.add("rules-active"); // adds blur to background
+});
+
+// Close panel
+closeBtn.addEventListener("click", () => {
+    rulesPanel.classList.remove("active");
+    document.body.classList.remove("rules-active");
+});
+
+// Close panel if clicked outside
+rulesPanel.addEventListener("click", (e) => {
+    if (e.target === rulesPanel) {
+        rulesPanel.classList.remove("active");
+        document.body.classList.remove("rules-active");
+    }
+});
 
 // ================= VARIABLES =================
 
@@ -130,6 +155,70 @@ function solveHanoi(n, from, to, via) {
 
     solveHanoi(n - 1, via, to, from);
 }
+/* ================= MANUAL MODE TOGGLE ================= */
+
+manualMode.addEventListener("click", () => {
+    if (totalDisks === 0) {
+        alert("Generate disks first!");
+        return;
+    }
+    moveManual.style.display =
+        moveManual.style.display === "grid" ? "none" : "grid";
+    manualControls.style.display =
+        manualControls.style.display === "grid" ? "none" : "grid";
+});
+
+
+/* ================= MOVE FUNCTION ================= */
+
+function moveDisk(fromTower, toTower) {
+    const disk = fromTower.lastElementChild;
+    if (!disk) return;
+
+    const diskSize = parseInt(disk.dataset.size);
+    const topDisk = toTower.lastElementChild;
+    const topSize = topDisk ? parseInt(topDisk.dataset.size) : Infinity;
+
+    if (diskSize < topSize) {
+        // Move disk
+        toTower.appendChild(disk);
+
+        // Increment move counter
+        moves++;
+        moveCounter.innerText = moves;
+
+        // Log the step
+        const stepText = `Step ${moves}: ${getTowerName(fromTower)} → ${getTowerName(toTower)}`;
+        stepsArray.push(stepText);
+
+        const p = document.createElement("p");
+        p.textContent = stepText;
+        messageLog.appendChild(p);
+        messageLog.scrollTop = messageLog.scrollHeight;
+
+        // ===== WIN CHECK =====
+        if (destination.childElementCount === totalDisks) {
+            setTimeout(() => {
+                alert(`🎉 Puzzle Solved in ${moves} moves!`);
+                addDownloadButton(); // PDF button added here
+            }, 200);
+        }
+
+    } else {
+        alert("❌ Invalid Move!");
+    }
+}
+
+/* ================= BUTTON EVENT LISTENERS ================= */
+
+manualButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const fromTower = document.getElementById(button.dataset.from);
+        const toTower = document.getElementById(button.dataset.to);
+
+        moveDisk(fromTower, toTower); // uses the updated moveDisk
+    });
+});
 
 // ================= AUTO MODE =================
 

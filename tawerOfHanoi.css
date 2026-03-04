@@ -214,6 +214,30 @@ button:active {
 .rules-btn:hover {
     transform: scale(1.08);
 }
+/* ========================= */
+/* ===== RULES BUTTON ===== */
+/* ========================= */
+
+.rules-btn {
+    position: fixed;
+    top: 20px;
+    left: 25px;
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+    z-index: 2000;
+}
+
+.rules-btn:hover {
+    transform: scale(1.08);
+}
 
 /* ========================= */
 /* ===== RULES PANEL ===== */
@@ -237,6 +261,10 @@ button:active {
     left: 0;
 }
 
+/* ========================= */
+/* ===== RULES CONTENT ===== */
+/* ========================= */
+
 .rules-content h2 {
     margin-bottom: 20px;
 }
@@ -253,6 +281,18 @@ button:active {
     font-size: 20px;
 }
 
+/* ========================= */
+/* ===== BACKGROUND BLUR ===== */
+/* ========================= */
+
+/* Blur everything except panel when rules active */
+body.rules-active > *:not(.rules-panel) {
+    filter: blur(5px) brightness(0.7);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.4s ease;
+}
+
 /* Background Blur When Open */
 body.blur-active > *:not(.rules-panel) {
     filter: blur(6px);
@@ -266,7 +306,7 @@ body.blur-active > *:not(.rules-panel) {
 }
 
 #moveManual {
-    display: inline-block;
+    display: none;
     padding: 10px 25px;
     font-size: 18px;
     font-weight: bold;
