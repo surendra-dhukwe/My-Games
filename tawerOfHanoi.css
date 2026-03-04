@@ -189,3 +189,72 @@ button:active {
         font-size: 15px;
     }
 }
+
+/* ========================= */
+/* ===== RULES BUTTON ===== */
+/* ========================= */
+
+.rules-btn {
+    position: fixed;
+    top: 20px;
+    left: 25px;
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+    z-index: 2000;
+}
+
+.rules-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ========================= */
+/* ===== RULES PANEL ===== */
+/* ========================= */
+
+.rules-panel {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 350px;
+    height: 100vh;
+    background: rgba(20, 20, 40, 0.95);
+    backdrop-filter: blur(10px);
+    transition: 0.5s ease;
+    z-index: 3000;
+    padding: 25px;
+    color: white;
+}
+
+.rules-panel.active {
+    left: 0;
+}
+
+.rules-content h2 {
+    margin-bottom: 20px;
+}
+
+.rules-content ul {
+    line-height: 1.8;
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Background Blur When Open */
+body.blur-active > *:not(.rules-panel) {
+    filter: blur(6px);
+    transition: 0.4s ease;
+}

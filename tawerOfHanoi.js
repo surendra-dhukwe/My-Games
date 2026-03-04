@@ -179,3 +179,16 @@ moveManual.addEventListener("click", () => {
     moveDisk(fromTower, toTower);
 });
 
+const rulesBtn = document.getElementById("rulesBtn");
+const rulesPanel = document.getElementById("rulesPanel");
+const closeRules = document.getElementById("closeRules");
+
+rulesBtn.addEventListener("click", () => {
+    rulesPanel.classList.add("active");
+    document.body.classList.add("blur-active");
+});
+
+closeRules.addEventListener("click", () => {
+    rulesPanel.classList.remove("active");
+    document.body.classList.remove("blur-active");
+});
