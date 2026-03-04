@@ -161,3 +161,21 @@ function executeMoves() {
 
     setTimeout(executeMoves, 700);
 }
+
+// ================= MANUAL CONTROLS =================
+
+moveManual.addEventListener("click", () => {
+    const fromId = document.getElementById("fromSelect").value;
+    const toId = document.getElementById("toSelect").value;
+
+    if (fromId === toId) {
+        alert("Please select different towers for move.");
+        return;
+    }
+
+    const fromTower = document.getElementById(fromId);
+    const toTower = document.getElementById(toId);
+
+    moveDisk(fromTower, toTower);
+});
+

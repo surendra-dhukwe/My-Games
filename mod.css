@@ -1,0 +1,39 @@
+/* ===== Mode Toggle Button ===== */
+.mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+/* Hover Animation */
+.mode-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Click Effect */
+.mode-toggle:active {
+    transform: scale(0.95);
+}
+
+/* ===== Dark Mode ===== */
+body.dark-mode {
+    background: linear-gradient(135deg, #0f0c29, #24243e);    transition: 0.4s ease;
+}
